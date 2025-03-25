@@ -85,12 +85,62 @@
         }
 
         function submitForm() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+            const username = document.getElementById('username').value.trim();
+            let username = document.getElementById('username').value.trim();
+            const usernameRegex = /^[a-z0-9]{5,}$/;
+
+            if (!username) {
+                alert('Username cannot be empty');
+                return;
+            }
+
+            if (!usernameRegex.test(username)) {
+                alert('Username cannot contain uppercase characters or symbols');
+                return;
+            }
+
+            username = username.toLowerCase();
+            const confirmPassword = document.getElementById('confirm-password').value.trim();
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            if (!username) {
+                alert('Username cannot be empty');
+                return;
+            }
+
+            if (!password) {
+                alert('Password cannot be empty');
+                return;
+            }
+
+            if (!passwordRegex.test(password)) {
+                alert('Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, one number, and one special character.');
+                return;
+            }
+
             if (isLogin) {
+                document.getElementById('confirm-password').value = '';
                 alert(`Logging in with Username: ${username} and Password: ${password}`);
             } else {
-                alert(`Registering with Username: ${username} and Password: ${password}`);
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match!');
+                    return;
+                }
+
+                const firstName = document.getElementById('first-name').value.trim();
+                const lastName = document.getElementById('last-name').value.trim();
+
+                if (!firstName) {
+                    alert('First Name cannot be empty');
+                    return;
+                }
+
+                if (!lastName) {
+                    alert('Last Name cannot be empty');
+                    return;
+                }
+
+                alert(`Registering with First Name: ${firstName}, Last Name: ${lastName}, Username: ${username} and Password: ${password}`);
             }
         }
     </script>
