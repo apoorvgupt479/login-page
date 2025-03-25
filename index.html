@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px; /* Added margin-top to increase spacing */
+        }
+        .container button:hover {
+            background-color: #218838;
+        }
+        .toggle-link {
+            text-align: center;
+            display: block;
+            margin-top: 10px;
+            color: #007bff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+        <h2 id="form-title">Login</h2>
+        <input type="text" id="first-name" placeholder="First Name" class="register-only" style="display: none;">
+        <input type="text" id="last-name" placeholder="Last Name" class="register-only" style="display: none;">
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <input type="password" id="confirm-password" placeholder="Confirm Password" class="register-only" style="display: none;">
+        <button onclick="submitForm()">Submit</button>
+        <span class="toggle-link" onclick="toggleForm()">Don't have an account? Register</span>
+    </div>
+
+    <script>
+        let isLogin = true;
+
+        function toggleForm() {
+            const formTitle = document.getElementById('form-title');
+            const toggleLink = document.querySelector('.toggle-link');
+            const registerFields = document.querySelectorAll('.register-only');
+            if (isLogin) {
+                formTitle.textContent = 'Register';
+                toggleLink.textContent = 'Already have an account? Login';
+                registerFields.forEach(field => field.style.display = 'block');
+            } else {
+                formTitle.textContent = 'Login';
+                toggleLink.textContent = "Don't have an account? Register";
+                registerFields.forEach(field => field.style.display = 'none');
+            }
+            isLogin = !isLogin;
+        }
+
+        function submitForm() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (isLogin) {
+                alert(`Logging in with Username: ${username} and Password: ${password}`);
+            } else {
+                alert(`Registering with Username: ${username} and Password: ${password}`);
+            }
+        }
+    </script>
+</body>
+</html></div>
